@@ -1,0 +1,101 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background:#f1f5f9;
+  color:#0f172a;
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  border:1px solid #e2e8f0;
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.badge-red{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.badge-green{
+  background:#dcfce7;
+  color:#16a34a;
+}
+
+.badge-blue{
+  background:#dbeafe;
+  color:#2563eb;
+}
+
+.badge-amber{
+  background:#fef3c7;
+  color:#d97706;
+}
+
+.badge-gray{
+  background:#e5e7eb;
+  color:#475569;
+}
+
+.nav-btn{
+  width:100%;
+  border:none;
+  background:none;
+  padding:12px;
+  text-align:left;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.nav-btn:hover{
+  background:#eff6ff;
+}
+
+.nav-btn.active{
+  background:#2563eb;
+  color:#fff;
+}
+
+.sidebar{
+  width:250px;
+  background:#fff;
+  border-right:1px solid #e2e8f0;
+  padding:16px;
+  min-height:100vh;
+}
+
+.bottom-bar{
+  display:none;
+}
+
+@media(max-width:768px){
+  .sidebar{
+    display:none;
+  }
+
+  .bottom-bar{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#fff;
+    border-top:1px solid #e2e8f0;
+    justify-content:space-around;
+    padding:10px;
+  }
+}
