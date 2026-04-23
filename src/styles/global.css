@@ -10,6 +10,7 @@ body{
   color:#0f172a;
 }
 
+/* CARDS */
 .card{
   background:#fff;
   border-radius:14px;
@@ -17,6 +18,7 @@ body{
   border:1px solid #e2e8f0;
 }
 
+/* BADGES */
 .badge{
   display:inline-block;
   padding:4px 10px;
@@ -50,6 +52,52 @@ body{
   color:#475569;
 }
 
+/* BUTTONS */
+.btn{
+  border:none;
+  background:#e2e8f0;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+  transition:0.2s;
+}
+
+.btn:hover{
+  opacity:0.92;
+}
+
+.btn-primary{
+  background:#2563eb;
+  color:#fff;
+}
+
+.btn-danger{
+  background:#dc2626;
+  color:#fff;
+}
+
+.btn-sm{
+  padding:8px 10px;
+  font-size:13px;
+}
+
+/* INPUTS */
+.input{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #dbe2ea;
+  border-radius:10px;
+  outline:none;
+  font-size:14px;
+}
+
+.input:focus{
+  border-color:#2563eb;
+}
+
+/* NAV */
 .nav-btn{
   width:100%;
   border:none;
@@ -70,6 +118,7 @@ body{
   color:#fff;
 }
 
+/* SIDEBAR */
 .sidebar{
   width:250px;
   background:#fff;
@@ -82,7 +131,87 @@ body{
   display:none;
 }
 
+/* MODAL */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,0.55);
+  backdrop-filter:blur(5px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  padding:20px;
+}
+
+.modal{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.18);
+  animation:fadeIn 0.25s ease;
+}
+
+/* SPINNER */
+.spinner{
+  width:40px;
+  height:40px;
+  border:4px solid #dbeafe;
+  border-top:4px solid #2563eb;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+/* ANIMATIONS */
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE FIX */
+img,
+iframe,
+video,
+canvas{
+  max-width:100%;
+}
+
+button{
+  white-space:nowrap;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+}
+
+@media(max-width:1024px){
+  .sidebar{
+    width:220px;
+  }
+}
+
 @media(max-width:768px){
+
+  body{
+    font-size:14px;
+  }
+
   .sidebar{
     display:none;
   }
@@ -97,5 +226,79 @@ body{
     border-top:1px solid #e2e8f0;
     justify-content:space-around;
     padding:10px;
+    z-index:100;
   }
+
+  .card{
+    padding:16px;
+    border-radius:12px;
+  }
+
+  h1,h2,h3,h4{
+    font-size:95%;
+  }
+
+  button{
+    font-size:13px;
+    padding:8px 12px;
+  }
+
+  .modal{
+    width:95%;
+    max-width:95%;
+    padding:20px;
+    border-radius:18px;
+  }
+}
+
+@media(max-width:600px){
+
+  .card{
+    padding:14px;
+  }
+
+  .bottom-bar button{
+    font-size:11px;
+  }
+
+  .bottom-bar span{
+    font-size:18px;
+  }
+
+  h1,h2,h3{
+    line-height:1.3;
+  }
+}
+
+@media(max-width:480px){
+
+  .card{
+    padding:12px;
+  }
+
+  button{
+    width:100%;
+  }
+
+  .modal{
+    padding:14px;
+  }
+}
+.dark-theme{
+  background:#0f172a;
+  color:#fff;
+}
+
+.dark-theme .card,
+.dark-theme .sidebar,
+.dark-theme .modal{
+  background:#1e293b;
+  color:#fff;
+  border-color:#334155;
+}
+
+.dark-theme .input{
+  background:#0f172a;
+  color:#fff;
+  border-color:#334155;
 }

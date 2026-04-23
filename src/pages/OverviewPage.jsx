@@ -43,6 +43,27 @@ export default function OverviewPage({ reports, activities }) {
 
   <MapView reports={reports} />
 </div>
+<div className="card">
+  <h3
+    style={{
+      marginBottom:"14px"
+    }}
+  >
+    Live Activity
+  </h3>
+
+  <div
+    style={{
+      display:"grid",
+      gap:"12px"
+    }}
+  >
+    <div>🟢 Report added - 2 min ago</div>
+    <div>👤 Volunteer assigned - 5 min ago</div>
+    <div>✅ Flood case resolved - 9 min ago</div>
+    <div>🤖 AI matched 3 volunteers</div>
+  </div>
+</div>
     </>
   );
 }

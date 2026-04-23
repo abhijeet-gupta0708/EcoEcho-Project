@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function AIMatchPage({
   reports,
   volunteers,
+  setVolunteers,
 }) {
   const [running, setRunning] =
     useState(false);
@@ -22,7 +24,7 @@ export default function AIMatchPage({
             "active"
         );
 
-      const available =
+      const availableVols =
         volunteers.filter(
           (v) =>
             v.status ===
@@ -31,18 +33,18 @@ export default function AIMatchPage({
 
       const pairs =
         activeReports.map(
-          (report, i) => ({
-            report,
+          (r, i) => ({
+            report: r,
             volunteer:
-              available[
+              availableVols[
                 i %
-                  available.length
+                  availableVols.length
               ],
             score:
               Math.round(
-                88 +
+                85 +
                   Math.random() *
-                    10
+                    12
               ),
           })
         );
@@ -50,6 +52,30 @@ export default function AIMatchPage({
       setResults(pairs);
       setRunning(false);
     }, 2200);
+  };
+
+  const assignVolunteer = (
+    volunteer,
+    report
+  ) => {
+    setVolunteers((prev) =>
+      prev.map((v) =>
+        v.id === volunteer.id
+          ? {
+              ...v,
+              status: "on-task",
+              tasks:
+                v.tasks + 1,
+              currentTask:
+                report.title,
+            }
+          : v
+      )
+    );
+
+    toast.success(
+      `${volunteer.name} assigned to ${report.title}`
+    );
   };
 
   return (
@@ -67,42 +93,38 @@ export default function AIMatchPage({
           background:
             "#2563eb",
           borderRadius:
-            "16px",
-          padding: "24px",
+            "14px",
+          padding: "22px",
           color: "#fff",
         }}
       >
-        <h2
+        <p
           style={{
             fontSize:
-              "20px",
+              "16px",
             fontWeight:
               "700",
             marginBottom:
-              "8px",
+              "4px",
           }}
         >
           🤖 AI Volunteer Matcher
-        </h2>
+        </p>
 
         <p
           style={{
-            opacity: 0.9,
+            fontSize:
+              "13px",
+            opacity: 0.85,
             marginBottom:
-              "18px",
-            lineHeight:
-              1.5,
+              "16px",
           }}
         >
           Automatically
-          analyze active
-          reports and
-          assign the best
+          match active
+          reports with
           available
-          volunteers based
-          on urgency,
-          skills and
-          availability.
+          volunteers.
         </p>
 
         <button
@@ -130,84 +152,42 @@ export default function AIMatchPage({
 
       {/* Loading */}
       {running && (
-        <div
-          className="card"
-          style={{
-            textAlign:
-              "center",
-            padding:
-              "30px",
-          }}
-        >
-          <div
-            style={{
-              width: "52px",
-              height:
-                "52px",
-              border:
-                "5px solid #dbeafe",
-              borderTop:
-                "5px solid #2563eb",
-              borderRadius:
-                "50%",
-              margin:
-                "0 auto 14px",
-              animation:
-                "spin 1s linear infinite",
-            }}
-          />
-
+        <div className="card">
+          <div className="spinner" />
           <p
             style={{
-              color:
-                "#64748b",
+              marginTop:
+                "12px",
             }}
           >
-            AI is analyzing
-            reports and
-            matching best
-            volunteers...
+            AI analyzing
+            reports...
           </p>
         </div>
       )}
 
       {/* Results */}
       {results.map(
-        (
-          item,
-          index
-        ) => (
+        (item, i) => (
           <div
-            key={
-              index
-            }
+            key={i}
             className="card"
             style={{
               display:
                 "flex",
-              alignItems:
-                "center",
               justifyContent:
                 "space-between",
+              alignItems:
+                "center",
               flexWrap:
                 "wrap",
-              gap: "16px",
+              gap: "14px",
             }}
           >
             <div>
-              <p
-                style={{
-                  fontSize:
-                    "12px",
-                  color:
-                    "#94a3b8",
-                  marginBottom:
-                    "4px",
-                }}
-              >
+              <small>
                 REPORT
-              </p>
-
+              </small>
               <h4>
                 {
                   item
@@ -217,31 +197,10 @@ export default function AIMatchPage({
               </h4>
             </div>
 
-            <div
-              style={{
-                fontSize:
-                  "26px",
-                color:
-                  "#cbd5e1",
-              }}
-            >
-              →
-            </div>
-
             <div>
-              <p
-                style={{
-                  fontSize:
-                    "12px",
-                  color:
-                    "#94a3b8",
-                  marginBottom:
-                    "4px",
-                }}
-              >
+              <small>
                 BEST MATCH
-              </p>
-
+              </small>
               <h4>
                 {
                   item
@@ -251,18 +210,9 @@ export default function AIMatchPage({
               </h4>
             </div>
 
-            <div
-              style={{
-                textAlign:
-                  "center",
-              }}
-            >
-              <p
+            <div>
+              <h3
                 style={{
-                  fontSize:
-                    "28px",
-                  fontWeight:
-                    "700",
                   color:
                     "#16a34a",
                 }}
@@ -272,12 +222,20 @@ export default function AIMatchPage({
                     .score
                 }
                 %
-              </p>
-
-              <small>
-                match
-              </small>
+              </h3>
             </div>
+
+            <button
+              className="btn btn-primary"
+              onClick={() =>
+                assignVolunteer(
+                  item.volunteer,
+                  item.report
+                )
+              }
+            >
+              Assign
+            </button>
           </div>
         )
       )}

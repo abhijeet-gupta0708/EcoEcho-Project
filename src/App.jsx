@@ -13,6 +13,8 @@ import { PAGE_TITLES } from "./constants/navigation";
 
 export default function App() {
   const [page, setPage] = useState("overview");
+  const [dark, setDark] =
+  useState(false);
 
 const [reports, setReports] =
   useState(REPORTS);
@@ -57,7 +59,18 @@ const [volunteers, setVolunteers] = useState(VOLUNTEERS);
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+  <div
+    className={
+      dark
+        ? "dark-theme"
+        : ""
+    }
+    style={{
+      display: "flex",
+      minHeight: "100vh",
+    }}
+  >
+    
       <Sidebar page={page} setPage={setPage} />
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
